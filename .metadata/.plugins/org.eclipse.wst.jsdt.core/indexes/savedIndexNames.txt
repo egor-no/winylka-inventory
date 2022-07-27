@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+C:\Users\ezimo\eclipse-workspace\wynylka-inventory\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3028574359.index
+3385547043.index
+2380328939.index
+1404212090.index
+3455593526.index
