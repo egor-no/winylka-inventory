@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/template.xhtml">
+	
+	<f:metadata>
+		<f:viewParam name="itemId" value="#{catalogItemDeleteBean.itemId}"></f:viewParam>
+		<f:event type="preRenderView" listener="#{catalogItemDeleteBean.fetchItem()}"/>
+	</f:metadata>
+	
+	<ui:define name="body">
+
+		<h:form>
+
+			<h3>Please confirm that you would like to delete the following:</h3>
+			<div>
+				<h:outputLabel value="Artist: "></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDeleteBean.item.artistName}" />
+			</div>
+			<div>
+				<h:outputLabel value="Album:"></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDeleteBean.item.albumTitle}" />
+			</div>
+			<div>
+				<h:outputLabel value="Album year: "></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDeleteBean.item.albumYear}" />
+			</div>
+			<div>
+				<h:outputLabel value="Album info:"></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDeleteBean.item.albumInfo}" />
+			</div>
+			<div>
+				<h:outputLabel value="Available Date:"></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDeleteBean.item.releaseDate}">
+					<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
+				</h:outputLabel>
+			</div>
+			<div>
+				<h:outputLabel value="Format: "></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDeleteBean.item.format}" />
+			</div>
+			<div>
+				<h:outputLabel value="Notes:"></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDeleteBean.item.notes}" />
+			</div>
+			<div>
+				<h:outputLabel value="Label:"></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDeleteBean.item.label}" />
+			</div>
+			<h:commandButton action="#{catalogItemDeleteBean.removeItem()}" value="Submit" />
+			<h:commandButton action="list" value="Cancel" />
+		</h:form>
+	</ui:define>
+	
+</ui:composition>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<ui:composition template="/template.xhtml">
+	<ui:define name="pageHeader">
+		<h:link valuie="#{msg['form.pageTitle']}" outcome="form" />
+		<h:link valuie="#{msg['form.pageTitle']}" outcome="list" />
+	</ui:define>
+	<ui:define name="body">
+	
+		<h:outputScript library="js" name="shake.js"></h:outputScript>
+		<h:form id="item-form">
+			<div>
+				<h:outputLabel value="Artist Name" />
+				<h:inputText value="#{catalogItemFormBean.item.artistName}" />
+			</div>
+			<div>
+				<h:outputLabel value="Album Title" />
+				<h:inputText value="#{catalogItemFormBean.item.albumTitle}" />
+			</div>
+			<div>
+				<h:outputLabel value="Album Info" />
+				<h:inputText value="#{catalogItemFormBean.item.albumInfo}" />
+			</div>
+			<div>
+				<h:outputLabel value="Year" />
+				<h:inputText value="#{catalogItemFormBean.item.albumYear}" />
+			</div>
+			<div>
+				<h:outputLabel value="Release Date" />
+				<h:inputText value="#{catalogItemFormBean.item.releaseDate}"> 
+					<f:convertDateTime type="localDate" patterm="dd-MM-yyyy" />
+				</h:inputText>
+			</div>
+			<div>
+				<h:outputLabel value="Format" />
+				<h:inputText value="#{catalogItemFormBean.item.format}" />
+			</div>
+			<div>
+				<h:outputLabel value="Notes" />
+				<h:inputText value="#{catalogItemFormBean.item.notes}" />
+			</div>
+			<div>
+				<h:outputLabel value="Label" />
+				<h:inputText value="#{catalogItemFormBean.item.label}" />
+			</div>
+			
+			<h:commandButton value="Submit" action="#{catalogItemFormBean.addItem()}" />
+		</h:form>
+	</ui:define>
+
+	</ui:composition>
+</html>

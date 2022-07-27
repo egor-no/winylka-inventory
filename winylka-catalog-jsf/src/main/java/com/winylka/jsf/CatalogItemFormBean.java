@@ -3,7 +3,6 @@ package com.winylka.jsf;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -19,7 +18,6 @@ public class CatalogItemFormBean implements Serializable {
 	
 	public String addItem() {
 		Long itemId = this.items.size() + 1L;
-		System.out.println("IM HEREEEEEE");
 		
 		CatalogItem newItem = new CatalogItem(); 
 		newItem.setItemId(itemId);
