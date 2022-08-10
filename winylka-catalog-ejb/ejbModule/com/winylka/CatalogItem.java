@@ -1,4 +1,4 @@
-package com.winylka.jsf;
+package com.winylka;
 
 import java.time.LocalDate;
 

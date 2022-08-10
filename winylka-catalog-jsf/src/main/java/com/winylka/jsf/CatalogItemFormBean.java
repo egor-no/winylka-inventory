@@ -3,8 +3,13 @@ package com.winylka.jsf;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import com.winylka.CatalogItem;
+import com.winylka.CatalogLocal;
 
 @SessionScoped
 @Named
@@ -12,12 +17,18 @@ public class CatalogItemFormBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	private CatalogLocal catalogBean; 
+	
+	@Inject
+	private InventoryService inventoryService; 
+	
 	private CatalogItem item = new CatalogItem();
 	
 	private List<CatalogItem> items = new ArrayList<>();
 	
 	public String addItem() {
-		Long itemId = this.items.size() + 1L;
+		Long itemId = this.catalogBean.getItems().size() + 1L;
 		
 		CatalogItem newItem = new CatalogItem(); 
 		newItem.setItemId(itemId);
@@ -29,14 +40,16 @@ public class CatalogItemFormBean implements Serializable {
 		newItem.setLabel(this.item.getLabel());
 		newItem.setNotes(this.item.getNotes());
 		newItem.setReleaseDate(this.item.getReleaseDate());
+		this.catalogBean.addItem(newItem); 
 		
-		items.add(newItem); 
-		
-		this.items.stream().forEach(item -> {
-			System.out.println(item.toString()); 
-		});
+		String name = this.item.getArtistName() + " - " + this.item.getAlbumTitle();
+		this.inventoryService.createItem(this.item.getItemId(), name);
 		
 		return "list?faces-redirect=true"; 
+	}
+	
+	public void init() {
+		this.items = this.catalogBean.getItems();
 	}
 
 	public CatalogItem getItem() {
