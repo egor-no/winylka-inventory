@@ -31,7 +31,6 @@ public class CatalogItemFormBean implements Serializable {
 		Long itemId = this.catalogBean.getItems().size() + 1L;
 		
 		CatalogItem newItem = new CatalogItem(); 
-		newItem.setItemId(itemId);
 		newItem.setAlbumTitle(this.item.getAlbumTitle());
 		newItem.setAlbumInfo(this.item.getAlbumInfo());
 		newItem.setArtistName(this.item.getArtistName());

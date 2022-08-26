@@ -2,26 +2,48 @@ package com.winylka;
 
 import java.time.LocalDate;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="RELEASE")
 public class CatalogItem {
 
+	@Id
+	@Column(name="RELEASE_ID")
+	@GeneratedValue(strategy=GenerationType.AUTO) 
 	private Long itemId; 
+	
+	@Column(name="ARTIST_NAME")
 	private String artistName; 
+	
+	@Column(name="ALBUM_TITLE")
 	private String albumTitle;
+	
+	@Column(name="ALBUM_INFO")
 	private String albumInfo; 
+	
+	@Column(name="ALBUM_YEAR")
 	private Integer albumYear; 
+	
+	@Column(name="RELEASE_DATE")
 	private LocalDate releaseDate;
+	
+	@Column(name="FORMAT")
 	private String format;
+	
+	@Column(name="NOTES")
 	private String notes; //notes such as vinyl colour, ltd edition, etc.
+	
+	@Column(name="LABEL")
 	private String label;
 	
 	public CatalogItem() {
 		
 	}
 	
-	public CatalogItem(Long id, String artistName, String albumTitle, String albumInfo, Integer albumYear, LocalDate releaseDate,
+	public CatalogItem(String artistName, String albumTitle, String albumInfo, Integer albumYear, LocalDate releaseDate,
 			String format, String notes, String label) {
 		super();
-		this.itemId = id;
 		this.artistName = artistName;
 		this.albumTitle = albumTitle;
 		this.albumInfo = albumInfo;
