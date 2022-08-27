@@ -8,6 +8,8 @@ import javax.persistence.*;
 @Table(name="RELEASE")
 public class CatalogItem {
 
+	private volatile int hashCode;
+	
 	@Id
 	@Column(name="RELEASE_ID")
 	@GeneratedValue(strategy=GenerationType.AUTO) 
@@ -126,14 +128,42 @@ public class CatalogItem {
 		this.label = label;
 	} 
 	
+	@Override 
+	public boolean equals(Object o) {
+		if (this == o) 
+			return true; 
+		if (!(o instanceof CatalogItem))
+			return false; 
+		CatalogItem that = (CatalogItem) o; 
+		return this.itemId == that.itemId;
+	}
+	
+	@Override 
+	public int hashCode() {
+		int n = (int) (this.itemId / 1); 
+		return 17 +  n * 31; 
+	}
+	
 	public String toString() {
 		StringBuilder sb = new StringBuilder(); 
 		sb.append(this.itemId + ": ");
 		sb.append(this.artistName + " " + this.albumTitle); 
-		sb.append(" (" + this.albumYear + "). " + this.albumInfo);
-		sb.append(this.format + " " + this.notes + ". Out " + this.releaseDate + " on " + this.label);
-		
+		sb.append(" (" + this.albumYear + "). ");
+		if (isNotEmpty(this.albumInfo)) 
+			sb.append(this.albumInfo + " ");
+		if (isNotEmpty(this.format)) 
+			sb.append(this.format + " ");
+		if (isNotEmpty(this.notes)) 
+			sb.append(this.notes + ".");
+		if (this.releaseDate != null) 
+			sb.append("Out " + this.releaseDate);
+		if (isNotEmpty(this.label))
+			sb.append(" on " + this.label);
 		return sb.toString();
+	}
+	
+	private boolean isNotEmpty(String string) {
+		return string != null && string.isBlank(); 
 	}
 	
 }

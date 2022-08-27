@@ -3,15 +3,16 @@ package com.winylka.jsf;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.winylka.CatalogItem;
 import com.winylka.CatalogLocal;
 
-@SessionScoped
+@RequestScoped
 @Named
 public class CatalogItemFormBean implements Serializable {
 	
@@ -27,9 +28,19 @@ public class CatalogItemFormBean implements Serializable {
 	
 	private List<CatalogItem> items = new ArrayList<>();
 	
+	private String searchText;
+	
+	public void searchBySearchPhrase() {
+		this.items = this.catalogBean.searchByArtistName(this.searchText);
+		List<CatalogItem> moreItems= this.catalogBean.searchByAlbumTitle(this.searchText);
+
+		for(CatalogItem item : moreItems) {
+			if (!items.contains(item))
+				items.add(item); 
+		}
+	}
+	
 	public String addItem() {
-		Long itemId = this.catalogBean.getItems().size() + 1L;
-		
 		CatalogItem newItem = new CatalogItem(); 
 		newItem.setAlbumTitle(this.item.getAlbumTitle());
 		newItem.setAlbumInfo(this.item.getAlbumInfo());
@@ -66,5 +77,14 @@ public class CatalogItemFormBean implements Serializable {
 	public void setItems(List<CatalogItem> items) {
 		this.items = items;
 	} 
+	
+	public String getSearchText() {
+		return searchText; 
+	}
+	
+	public void setSearchText(String searchText) {
+		this.searchText = searchText; 
+	}
+	
 	
 }

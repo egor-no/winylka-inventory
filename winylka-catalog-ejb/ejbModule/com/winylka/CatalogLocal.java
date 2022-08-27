@@ -11,5 +11,14 @@ public interface CatalogLocal {
 	
 	public void addItem(CatalogItem item);
 	
+	public CatalogItem findItem(Long itemId);
+	
+	public void deleteItem(CatalogItem item); 
+	
+	public List<CatalogItem> searchByArtistName(String name); 
+	
+	public List<CatalogItem> searchByAlbumTitle(String title);
+	
+	
 
 }
