@@ -1,6 +1,8 @@
 package com.winylka;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -14,6 +16,11 @@ public class CatalogItem {
 	@Column(name="RELEASE_ID")
 	@GeneratedValue(strategy=GenerationType.AUTO) 
 	private Long itemId; 
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinTable(joinColumns = @JoinColumn(name="CATALOG_ITEM_ID"), 
+			inverseJoinColumns = @JoinColumn(name="ITEM_MANAGER_ID"))
+	private List<ItemManager> itemManagers = new ArrayList<>(); 
 	
 	@Column(name="ARTIST_NAME")
 	private String artistName; 
@@ -127,6 +134,14 @@ public class CatalogItem {
 	public void setLabel(String label) {
 		this.label = label;
 	} 
+	
+	public List<ItemManager> getItemManagers() {
+		return itemManagers;
+	}
+
+	public void setItemManagers(List<ItemManager> itemManagers) {
+		this.itemManagers = itemManagers;
+	}
 	
 	@Override 
 	public boolean equals(Object o) {

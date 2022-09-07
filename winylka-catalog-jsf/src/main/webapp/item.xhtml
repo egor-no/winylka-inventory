@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<ui:composition template="/template.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="itemId" value="#{catalogItemDetailBean.itemId}"></f:viewParam>
+		<f:event type="preRenderView" listener="#{catalogItemDetailBean.fetchItem()}" />
+	</f:metadata>
+	<ui:define name="pageHeader">
+		<h:link value="#{msg['form.pageTitle']}" outcome="form"/> | 
+		<h:link value="#{msg['list.pageTitle']}" outcome="list"/>
+	</ui:define>
+	<ui:define name="body">
+
+		<div>
+			<h3>Album Details</h3>
+			<div>
+				<h:outputLabel value="Artist Name: "></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDetailBean.item.artistName}" />
+			</div>
+			<div>
+				<h:outputLabel value="Album Title:"></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDetailBean.item.albumTitle}" />
+			</div>
+			<div>
+				<h:outputLabel value="Album Year: "></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDetailBean.item.albumYear}" />
+			</div>
+			<br />
+			<div>
+				<h:outputLabel value="Album Info:"></h:outputLabel><br />
+				<h:outputLabel value="#{catalogItemDetailBean.item.albumInfo}" />
+			</div>
+			<h3>Release Details</h3>
+			<div>
+				<h:outputLabel value="Format: "></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDetailBean.item.format}" />
+			</div>
+			<div>
+				<h:outputLabel value="Notes: "></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDetailBean.item.notes}" />
+			</div>
+			<div>
+				<h:outputLabel value="Release Date:"></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDetailBean.item.releaseDate}">
+					<f:convertDateTime type="localDate" pattern="dd-MM-yyyy" />
+				</h:outputLabel>
+			</div>
+			<div>
+				<h:outputLabel value="Label: "></h:outputLabel>
+				<h:outputLabel value="#{catalogItemDetailBean.item.label}" />
+			</div>
+			
+		</div>
+
+		<h3>Managers</h3>
+		<h:panelGroup  id="managerList">
+			<ui:repeat value="#{catalogItemDetailBean.item.itemManagers}" varStatus="status">
+				<h:outputText value="#{catalogItemDetailBean.item.itemManagers[status.index].firstName}" /> 
+				<h:outputText value="${catalogItemDetailBean.item.itemManagers[status.index].lastName}" />
+				<br />
+			</ui:repeat>
+		</h:panelGroup>
+		
+		<h:form>
+			<h3>Add an Item Manager</h3>
+			<div>
+				<h:outputLabel value="First Name" /> 
+				<h:inputText id="firstName" value="#{catalogItemDetailBean.manager.firstName}"></h:inputText>
+				<br />
+				<br />
+				<h:outputLabel value="Last Name" />
+				<h:inputText id="lastName" value="#{catalogItemDetailBean.manager.lastName}"></h:inputText>
+			</div>
+			<h:commandButton value="Submit" action="#{catalogItemDetailBean.addManager()}">
+				<f:ajax execute="firstName lastName" render="managerList" />
+			</h:commandButton>
+		</h:form>
+		
+		
+	</ui:define>
+
+</ui:composition>
+</html>

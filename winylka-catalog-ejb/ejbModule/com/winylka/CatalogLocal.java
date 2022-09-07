@@ -19,6 +19,6 @@ public interface CatalogLocal {
 	
 	public List<CatalogItem> searchByAlbumTitle(String title);
 	
-	
+	public void saveItem(CatalogItem item);
 
 }

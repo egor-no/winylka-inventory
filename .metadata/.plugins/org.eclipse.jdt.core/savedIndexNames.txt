@@ -37,8 +37,8 @@ INDEX VERSION 1.131+C:\Users\ezimo\eclipse-workspace\wynylka-inventory\.metadata
 1652667555.index
 3849212772.index
 1627158915.index
-805851295.index
 1269307539.index
+805851295.index
 989014420.index
 2207907143.index
 34525335.index
@@ -52,11 +52,11 @@ INDEX VERSION 1.131+C:\Users\ezimo\eclipse-workspace\wynylka-inventory\.metadata
 3479404312.index
 4085149361.index
 1776716678.index
-1031667278.index
 6672157.index
-909342623.index
-2889088091.index
+1031667278.index
 3438584625.index
+2889088091.index
+909342623.index
 3110467042.index
 2381169384.index
 711893029.index

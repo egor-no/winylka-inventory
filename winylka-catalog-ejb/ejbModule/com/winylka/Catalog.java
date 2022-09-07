@@ -54,5 +54,10 @@ public class Catalog implements CatalogLocal {
 				.createQuery("select c from CatalogItem c " + " where c.albumTitle like :title", CatalogItem.class)
 				.setParameter("title", "%" + title + "%").getResultList();
 	}
+	
+	@Override 
+	public void saveItem(CatalogItem item) {
+		this.entityManager.merge(item); 
+	}
 
 }

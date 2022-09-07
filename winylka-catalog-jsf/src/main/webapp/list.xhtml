@@ -25,6 +25,11 @@
 		
 		<h:dataTable id="dataTable"  value="#{catalogItemFormBean.items}" var="item">
 			<h:column>
+				<h:link value="Details" outcome="item">
+						<f:param name="itemId" value="#{item.itemId}" />
+				</h:link>
+			</h:column>
+			<h:column>
 				<f:facet name="header">Artist</f:facet>
 				<h:outputText value="#{item.artistName}" />
 			</h:column>
@@ -43,10 +48,6 @@
 			<h:column>
 				<f:facet name="header">Notes</f:facet>
 				<h:outputText value="#{item.notes}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Label</f:facet>
-				<h:outputText value="#{item.label}" />
 			</h:column>
 			<h:column>
 				<h:link value="Remove" outcome="confirm">
