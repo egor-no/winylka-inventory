@@ -1160,3 +1160,12 @@ java.lang.IllegalArgumentException: java.lang.ClassCastException@4d79d59f
 
 !ENTRY org.jboss.ide.eclipse.as.wtp.core 1 16973825 2022-09-09 19:40:10.717
 !MESSAGE Server processes have terminated prematurely. Please check your server logs for more details. 
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2022-09-09 20:42:48.397
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2022-09-09 20:42:55.572
+!MESSAGE Server Startup Succeeded
+
+!ENTRY org.jboss.ide.eclipse.as.wtp.core 1 16973825 2022-09-09 20:43:28.818
+!MESSAGE Server processes have terminated prematurely. Please check your server logs for more details. 

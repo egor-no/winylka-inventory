@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+        
     <wb-module deploy-name="winylka-inventory">
+                
         <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+                
         <dependent-module archiveName="winylka-catalog-ejb.jar" deploy-path="/" handle="module:/resource/winylka-catalog-ejb/winylka-catalog-ejb">
+                        
             <dependent-object/>
+                        
             <dependency-type>uses</dependency-type>
+                    
         </dependent-module>
+                
         <dependent-module archiveName="winylka-catalog-jsf.war" deploy-path="/" handle="module:/resource/winylka-catalog-jsf/winylka-catalog-jsf">
+                        
+            <dependent-object/>
+                        
+            <dependency-type>uses</dependency-type>
+                    
+        </dependent-module>
+        <dependent-module archiveName="winylka-catalog-jax.war" deploy-path="/" handle="module:/resource/winylka-catalog-jax/winylka-catalog-jax">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
+            
     </wb-module>
+    
 </project-modules>

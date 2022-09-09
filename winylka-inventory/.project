@@ -5,6 +5,7 @@
 	<projects>
 		<project>winylka-catalog-ejb</project>
 		<project>winylka-catalog-jsf</project>
+		<project>winylka-catalog-jax</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
