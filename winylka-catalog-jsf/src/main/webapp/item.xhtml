@@ -69,15 +69,22 @@
 		<h:form>
 			<h3>Add an Item Manager</h3>
 			<div>
+				<div class="errorMessage">
+					<h:message for="email" />
+				</div>
 				<h:outputLabel value="First Name" /> 
 				<h:inputText id="firstName" value="#{catalogItemDetailBean.manager.firstName}"></h:inputText>
 				<br />
 				<br />
 				<h:outputLabel value="Last Name" />
 				<h:inputText id="lastName" value="#{catalogItemDetailBean.manager.lastName}"></h:inputText>
+				<br />
+				<br />
+				<h:outputLabel value="Email" />
+				<h:inputText id="email" value="#{catalogItemDetailBean.manager.email}"></h:inputText>
 			</div>
 			<h:commandButton value="Submit" action="#{catalogItemDetailBean.addManager()}">
-				<f:ajax execute="firstName lastName" render="managerList" />
+				<f:ajax execute="firstName lastName email" render="managerList" />
 			</h:commandButton>
 		</h:form>
 		

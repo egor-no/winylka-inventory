@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name="RELEASE")
@@ -17,26 +18,32 @@ public class CatalogItem {
 	@GeneratedValue(strategy=GenerationType.AUTO) 
 	private Long itemId; 
 	
+	@Size(min = 0, max = 3)
 	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(joinColumns = @JoinColumn(name="CATALOG_ITEM_ID"), 
 			inverseJoinColumns = @JoinColumn(name="ITEM_MANAGER_ID"))
 	private List<ItemManager> itemManagers = new ArrayList<>(); 
 	
+	@NotBlank(message = "Artist name can't be blank")
 	@Column(name="ARTIST_NAME")
 	private String artistName; 
 	
+	@NotBlank(message = "Album title can't be blank")
 	@Column(name="ALBUM_TITLE")
 	private String albumTitle;
 	
+	//@Alphabetic //doesn't really make much sense in this case, but I coudln't come up with a better idea to practise custom validation annotations
 	@Column(name="ALBUM_INFO")
 	private String albumInfo; 
 	
+	@Digits(message = "The year must be digits only", fraction = 0, integer = 4)
 	@Column(name="ALBUM_YEAR")
 	private Integer albumYear; 
 	
 	@Column(name="RELEASE_DATE")
 	private LocalDate releaseDate;
 	
+	@PermittedFormats
 	@Column(name="FORMAT")
 	private String format;
 	

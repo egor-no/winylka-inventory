@@ -15,37 +15,58 @@
 		<h:form id="item-form">
 			<div>
 				<h:outputLabel value="Artist Name" />
-				<h:inputText value="#{catalogItemFormBean.item.artistName}" />
+				<h:inputText id="artistName" value="#{catalogItemFormBean.item.artistName}" />
+				<div class="errorMessage">
+					<h:message for="artistName" />
+				</div>
 			</div>
 			<div>
 				<h:outputLabel value="Album Title" />
-				<h:inputText value="#{catalogItemFormBean.item.albumTitle}" />
+				<h:inputText id="albumTitle" value="#{catalogItemFormBean.item.albumTitle}" />
+				<div class="errorMessage">
+					<h:message for="albumTitle" />
+				</div>
 			</div>
 			<div>
 				<h:outputLabel value="Album Info" />
-				<h:inputText value="#{catalogItemFormBean.item.albumInfo}" />
+				<h:inputText id="albumInfo" value="#{catalogItemFormBean.item.albumInfo}" />
+				<div class="errorMessage">
+					<h:message for="albumInfo" />
+				</div>
 			</div>
 			<div>
 				<h:outputLabel value="Year" />
-				<h:inputText value="#{catalogItemFormBean.item.albumYear}" />
+				<h:inputText id="albumYear" value="#{catalogItemFormBean.item.albumYear}" />
+				<div class="errorMessage">
+					<h:message for="albumYear" />
+				</div>
 			</div>
 			<div>
 				<h:outputLabel value="Release Date" />
-				<h:inputText value="#{catalogItemFormBean.item.releaseDate}"> 
+				<h:inputText id="releaseDate" value="#{catalogItemFormBean.item.releaseDate}"> 
 					<f:convertDateTime type="localDate" patterm="dd-MM-yyyy" />
 				</h:inputText>
 			</div>
 			<div>
 				<h:outputLabel value="Format" />
-				<h:inputText value="#{catalogItemFormBean.item.format}" />
+				<h:inputText id="format" value="#{catalogItemFormBean.item.format}" />
+				<div class="errorMessage">
+					<h:message for="format" />
+				</div>
 			</div>
 			<div>
 				<h:outputLabel value="Notes" />
-				<h:inputText value="#{catalogItemFormBean.item.notes}" />
+				<h:inputText id="notes" value="#{catalogItemFormBean.item.notes}" />
+				<div class="errorMessage">
+					<h:message for="notes" />
+				</div>
 			</div>
 			<div>
 				<h:outputLabel value="Label" />
-				<h:inputText value="#{catalogItemFormBean.item.label}" />
+				<h:inputText id="label" value="#{catalogItemFormBean.item.label}" />
+				<div class="errorMessage">
+					<h:message for="label" />
+				</div>
 			</div>
 			
 			<h:commandButton value="Submit" action="#{catalogItemFormBean.addItem()}" />
