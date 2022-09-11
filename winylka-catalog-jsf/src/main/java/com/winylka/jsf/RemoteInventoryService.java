@@ -7,6 +7,7 @@ import java.util.Random;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Default;
 import javax.inject.Named;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -16,7 +17,7 @@ import javax.ws.rs.core.Response;
 
 @ApplicationScoped
 @RemoteService
-@Alternative
+@Default
 public class RemoteInventoryService implements InventoryService  {
 
 	private String apiURL = "http://localhost:8080/winylka-catalog-jax/winylka/api/";
@@ -38,7 +39,10 @@ public class RemoteInventoryService implements InventoryService  {
 
 	@Override
 	public Long getQuantity(Long catalogItemId) {
-		// TODO Auto-generated method stub
-		return null;
+		Client client = ClientBuilder.newClient();
+		InventoryItem inventoryItem = client.target(apiURL).path("inventoryitems").path("catalog")
+			.queryParam("catalogItemId", catalogItemId.toString())
+			.request().get(InventoryItem.class); 
+		return inventoryItem.getQuantity();
 	}
 }

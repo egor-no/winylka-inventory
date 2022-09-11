@@ -27,7 +27,7 @@ public class InventoryItemEndpoint {
 		this.entityManager.persist(inventoryitem);
 		return Response.created(UriBuilder.fromResource(InventoryItemEndpoint.class)
 				.path(String.valueOf(inventoryitem.getInventoryItemId())).build()).build();
-	}
+		}
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")

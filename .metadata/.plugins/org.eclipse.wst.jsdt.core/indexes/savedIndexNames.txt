@@ -4,5 +4,6 @@ INDEX VERSION 1.4+C:\Users\ezimo\eclipse-workspace\wynylka-inventory\.metadata\.
 3028574359.index
 1404212090.index
 3455593526.index
+2672738057.index
 1752679409.index
 3935080001.index
