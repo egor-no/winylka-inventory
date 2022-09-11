@@ -3,30 +3,37 @@ package com.winylka.jsf;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Alternative;
 import javax.inject.Named;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Response;
+
 
 @ApplicationScoped
 @RemoteService
 @Alternative
 public class RemoteInventoryService implements InventoryService  {
 
-	private Map<Long, InventoryItem> items = new HashMap<Long, InventoryItem>();
+	private String apiURL = "http://localhost:8080/winylka-catalog-jax/winylka/api/";
 
 	@Override
 	public void createItem(Long catalogItemId, String name) {
-		long inventoryItemId = items.size() + 1;
-		this.items.put(inventoryItemId, new InventoryItem(inventoryItemId, catalogItemId, name, 0L));
-		this.printInventory();
-	}
-
-	public void printInventory() {
-		System.out.println("Remote inventory contains:");
-		for (Entry<Long, InventoryItem> entry : this.items.entrySet()) {
-			System.out.println(entry.getValue().getName());
-		}
+		
+		int randomQuantity =  new Random().nextInt(10); 
+		
+		Client client = ClientBuilder.newClient();
+		Response response = client.target(apiURL)
+			.path("inventoryitems")
+			.request()
+			.post(Entity.json(new InventoryItem(null, catalogItemId, name, (long) randomQuantity)));
+			
+		System.out.println(response.getStatus());
+		System.out.println(response.getLocation().getPath());
 	}
 
 	@Override

@@ -41,7 +41,7 @@ public class CatalogItemFormBean implements Serializable {
 	}
 	
 	public String addItem() {
-		CatalogItem newItem = new CatalogItem(); 
+		/*CatalogItem newItem = new CatalogItem(); 
 		newItem.setAlbumTitle(this.item.getAlbumTitle());
 		newItem.setAlbumInfo(this.item.getAlbumInfo());
 		newItem.setArtistName(this.item.getArtistName());
@@ -49,8 +49,8 @@ public class CatalogItemFormBean implements Serializable {
 		newItem.setFormat(this.item.getFormat());
 		newItem.setLabel(this.item.getLabel());
 		newItem.setNotes(this.item.getNotes());
-		newItem.setReleaseDate(this.item.getReleaseDate());
-		this.catalogBean.addItem(newItem); 
+		newItem.setReleaseDate(this.item.getReleaseDate());*/
+		this.catalogBean.addItem(this.item); 
 		
 		String name = this.item.getArtistName() + " - " + this.item.getAlbumTitle();
 		this.inventoryService.createItem(this.item.getItemId(), name);
