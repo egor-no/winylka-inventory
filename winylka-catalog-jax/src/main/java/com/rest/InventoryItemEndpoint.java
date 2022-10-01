@@ -47,8 +47,8 @@ public class InventoryItemEndpoint {
 	}
 	
 	@GET
-	@Path("/catalog")
-	public InventoryItem findByCatalogId(@NotNull @QueryParam("catalogItemId") Long catalogItemId) {
+	@Path("/catalog/{catalogItemId}")
+	public InventoryItem findByCatalogId(@NotNull @PathParam("catalogItemId") Long catalogItemId) {
 		
 		TypedQuery<InventoryItem> query = this.entityManager
 				.createQuery("select i from InventoryItem i where i.catalogItemId = :catalogItemId", InventoryItem.class)

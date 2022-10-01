@@ -8804,3 +8804,9 @@ java.lang.InterruptedException
 
 !ENTRY org.jboss.ide.eclipse.as.wtp.core 1 16973825 2022-10-01 14:22:37.436
 !MESSAGE Server processes have terminated prematurely. Please check your server logs for more details. 
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2022-10-01 15:14:12.604
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2022-10-01 15:14:20.295
+!MESSAGE Server Startup Succeeded
