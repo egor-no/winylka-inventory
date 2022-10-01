@@ -5,6 +5,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -22,6 +23,7 @@ public class InventoryItemEndpoint {
 	@PersistenceContext
 	private EntityManager entityManager; 
 
+	@Transactional
 	@POST
 	public Response create(final InventoryItem inventoryitem) {
 		this.entityManager.persist(inventoryitem);
@@ -34,6 +36,7 @@ public class InventoryItemEndpoint {
 	public Response findById(@PathParam("id") final Long id) {
 
 		InventoryItem inventoryitem = this.entityManager.find(InventoryItem.class, id);
+		//InventoryItem inventoryitem = new InventoryItem(1L, 1L, "Album", 2L); 
 
 		if (inventoryitem == null) {
 			return Response.status(Status.NOT_FOUND).build();
@@ -65,6 +68,7 @@ public class InventoryItemEndpoint {
 		return inventoryitems;
 	}
 
+	@Transactional
 	@PUT
 	@Path("/{id:[0-9][0-9]*}")
 	public Response update(@PathParam("id") Long id, final InventoryItem inventoryitem) {
@@ -72,6 +76,7 @@ public class InventoryItemEndpoint {
 		return Response.noContent().build();
 	}
 
+	@Transactional
 	@DELETE
 	@Path("/{id:[0-9][0-9]*}")
 	public Response deleteById(@PathParam("id") final Long id) {

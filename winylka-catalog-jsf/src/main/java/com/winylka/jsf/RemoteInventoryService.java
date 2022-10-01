@@ -36,6 +36,25 @@ public class RemoteInventoryService implements InventoryService  {
 		System.out.println(response.getStatus());
 		System.out.println(response.getLocation().getPath());
 	}
+	
+	@Override
+	public void deleteItem(Long catalogItemId) {
+
+		Client client = ClientBuilder.newClient();
+		
+		InventoryItem inventoryItem = client.target(apiURL).path("inventoryitems").path("catalog")
+				.queryParam("catalogItemId", catalogItemId.toString())
+				.request().get(InventoryItem.class); 
+		
+		String inventoryItemPath = "inventoryitems/" + inventoryItem.getInventoryItemId(); 
+
+		Response response = client.target(apiURL)
+			.path(inventoryItemPath)
+			.request()
+			.delete(); 
+		
+		System.out.println(response.getStatus());
+	}
 
 	@Override
 	public Long getQuantity(Long catalogItemId) {

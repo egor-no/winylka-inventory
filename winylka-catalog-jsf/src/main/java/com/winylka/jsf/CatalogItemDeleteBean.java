@@ -25,6 +25,9 @@ public class CatalogItemDeleteBean implements Serializable {
 	private CatalogItemFormBean catalogItemFormBean; 
 	
 	@Inject
+	private InventoryService inventoryService; 
+	
+	@Inject
 	private CatalogLocal catalogBean; 
 	
 	@Inject
@@ -37,6 +40,7 @@ public class CatalogItemDeleteBean implements Serializable {
 	
 	public String removeItem() {
 		this.catalogBean.deleteItem(this.item);
+		this.inventoryService.deleteItem(this.itemId);
 		conversation.end(); 
 		return "list?faces-redirect=true";
 	}

@@ -35,4 +35,10 @@ public class LocalInventoryService implements InventoryService {
 		return 0L;
 	}
 
+	@Override
+	public void deleteItem(Long catalogItemId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
