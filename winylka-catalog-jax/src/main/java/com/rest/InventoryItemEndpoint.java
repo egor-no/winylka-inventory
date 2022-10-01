@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.Response.Status;
 
 import com.winylka.InventoryItem;
+import com.winylka.JmsService;
 
 @RequestScoped
 @Path("/inventoryitems")
@@ -24,11 +26,15 @@ public class InventoryItemEndpoint {
 	
 	@PersistenceContext
 	private EntityManager entityManager; 
+	
+	@Inject
+	private JmsService jmsService; 
 
 	@Transactional
 	@POST
 	public Response create(final InventoryItem inventoryitem) {
 		this.entityManager.persist(inventoryitem);
+		this.jmsService.send(inventoryitem.getName());
 		return Response.created(UriBuilder.fromResource(InventoryItemEndpoint.class)
 				.path(String.valueOf(inventoryitem.getInventoryItemId())).build()).build();
 		}

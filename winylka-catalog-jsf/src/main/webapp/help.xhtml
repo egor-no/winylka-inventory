@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<ui:composition template="/template.xhtml">
+
+	<f:metadata>
+		<f:viewAction action="#{catalogItemFormBean.init()}"></f:viewAction>
+	</f:metadata>
+
+	<ui:define name="pageHeader">
+		<h:link value="#{msg['form.pageTitle']}" outcome="form" /> |
+		<h:link value="#{msg['list.pageTitle']}" outcome="list" /> |
+		<h:link value="#{msg['help.pageTitle']}" outcome="help" />
+	</ui:define>
+
+	<ui:define name="body">
+	
+		<h3>Help Chat</h3>
+		<h:form name="chat">
+			<div>
+				<div>
+					<h:outputLabel value="Name" />
+					<h:inputText id="name" value="#{helpChatBean.name}"/>
+				</div>
+				<div>
+					<h:outputLabel value="Message" />
+					<h:inputText id="messageText" value="#{helpChatBean.messageText}"/>
+				</div>
+				<div>
+					<h:commandButton value="Submit" action="#{helpChatBean.sendMessage()}">
+						<f:ajax execute="@form" render="message" />
+					</h:commandButton>
+				</div>
+			</div>
+			<div id="message"></div>
+		</h:form>
+		<script>
+			function onMessage(message, channel, event) {
+				document.getElementById("message").innerHTML += "<br/>" + message; 
+			}
+		</script>
+		<f:websocket channel="help" onmessage="onMessage" />
+	</ui:define>
+</ui:composition>
+</html>

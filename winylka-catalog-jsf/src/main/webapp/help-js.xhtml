@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<ui:composition template="/template.xhtml">
+
+	<f:metadata>
+		<f:viewAction action="#{catalogItemFormBean.init()}"></f:viewAction>
+	</f:metadata>
+
+	<ui:define name="pageHeader">
+		<h:link value="#{msg['form.pageTitle']}" outcome="form" /> |
+		<h:link value="#{msg['list.pageTitle']}" outcome="list" /> |
+		<h:link value="#{msg['help.pageTitle']}" outcome="help" />
+	</ui:define>
+
+	<ui:define name="body">
+		<script>
+
+			window.onload = function(){
+
+				let socket = new WebSocket("ws://localhost:8080/winylka-catalog-jsf/socket/help");
+
+				socket.onmessage = function(event){
+					document.getElementById("message").innerHTML += event.data + "<br/>";
+				}
+
+				document.forms.chat.onsubmit = function(){
+					let message = document.getElementById("messageText").value;
+					let name = document.getElementById("name").value;
+					socket.send(name + ": " + message);
+					return false;
+				}
+			}
+
+		</script>
+		<h3>Help Chat</h3>
+		<form name="chat">
+			<div>
+				<div>
+					<label>Name:</label> <input id="name"></input>
+				</div>
+				<div>
+					<label>Message:</label> <input id="messageText"></input>
+				</div>
+				<button type="submit">Send</button>
+			</div>
+			<div id="message"></div>
+		</form>
+
+	</ui:define>
+</ui:composition>
+</html>
