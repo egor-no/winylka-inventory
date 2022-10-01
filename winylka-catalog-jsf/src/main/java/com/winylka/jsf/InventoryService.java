@@ -1,6 +1,7 @@
 package com.winylka.jsf;
 
 import java.io.Serializable;
+import java.util.concurrent.Future;
 
 public interface InventoryService extends Serializable {
 	

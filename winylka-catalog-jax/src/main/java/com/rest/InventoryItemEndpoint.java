@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.Response.Status;
@@ -46,8 +48,6 @@ public class InventoryItemEndpoint {
 		return Response.ok(inventoryitem).build();
 	}
 	
-	@GET
-	@Path("/catalog/{catalogItemId}")
 	public InventoryItem findByCatalogId(@NotNull @PathParam("catalogItemId") Long catalogItemId) {
 		
 		TypedQuery<InventoryItem> query = this.entityManager
@@ -58,6 +58,23 @@ public class InventoryItemEndpoint {
 		item.setQuantity(ThreadLocalRandom.current().nextLong(1,100));
 	
 		return item; 
+	}
+	
+	@GET
+	@Path("/catalog/{catalogItemId}")
+	public void asyncFindByCatalogId(@NotNull @PathParam("catalogItemId") Long catalogItemId, 
+			@Suspended AsyncResponse response) {
+		new Thread() { 
+			public void run() {
+				try {
+					sleep(5000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} 
+				
+				response.resume(findByCatalogId(catalogItemId)); 
+			}
+		}.start();
 	}
 
 	@GET

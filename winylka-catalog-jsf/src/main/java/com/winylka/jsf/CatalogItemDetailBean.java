@@ -1,6 +1,8 @@
 package com.winylka.jsf;
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -25,7 +27,7 @@ public class CatalogItemDetailBean implements Serializable {
 	
 	@Inject
 	@RemoteService
-	private InventoryService inventoryService;
+	private AsyncInventoryService inventoryService;
 
 	@Inject
 	private Conversation conversation;
@@ -35,9 +37,11 @@ public class CatalogItemDetailBean implements Serializable {
 	
 	private ItemManager manager = new ItemManager();
 
-	public void fetchItem() {
+	public void fetchItem() throws InterruptedException, ExecutionException {
 		this.item = this.catalogBean.findItem(this.itemId);
-		this.quantity = this.inventoryService.getQuantity(this.itemId);
+		
+		Future<InventoryItem> futureItem =  this.inventoryService.asyncGetInventoryItem(this.itemId);
+		this.quantity = futureItem.get().getQuantity();
 	}
 	
 	public void addManager() {
@@ -86,7 +90,7 @@ public class CatalogItemDetailBean implements Serializable {
 		return inventoryService;
 	}
 
-	public void setInventoryService(InventoryService inventoryService) {
+	public void setInventoryService(AsyncInventoryService inventoryService) {
 		this.inventoryService = inventoryService;
 	}
 
